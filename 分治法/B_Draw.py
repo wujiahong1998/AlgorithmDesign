@@ -42,13 +42,27 @@ def PrintPoints(p):
 
 def B_method(p,len):
     d = get_distance2(p[0],p[1])
+    a = 0
+    b = 1
+    plt.plot([p[a].x, p[b].x],[p[a].y, p[b].y], color='r')
+    plt.pause(1)
     for i in range(len-1):
         for j in range(i+1,len):
+            if i == 0 and j == 1:
+                    continue
             distance2 = get_distance2(p[i],p[j])
+            plt.plot([p[i].x, p[j].x],[p[i].y, p[j].y], color='B',ls='--')
+            plt.pause(1)
+            plt.plot([p[i].x, p[j].x],[p[i].y, p[j].y], color='W',alpha=0.99)
+            plt.pause(1)
             if distance2 < d:
+                plt.plot([p[a].x, p[b].x],[p[a].y, p[b].y], color='W',alpha=0.99)
+                plt.pause(1)
                 a = i
                 b = j
                 d = distance2
+                plt.plot([p[i].x, p[j].x],[p[i].y, p[j].y], color='r')
+                plt.pause(1)
 
     print("最近点对为：(%.2f,%.2f) 和 (%.2f,%.2f)，距离为: %.2f" % (p[a].x,p[a].y,p[b].x,p[b].y,math.sqrt(d)))
 
@@ -56,5 +70,5 @@ if __name__ == '__main__':
     N = int(input("请输入点集规模："))
     p = setPoints(N)
 
-    #PrintPoints(p)
-    #B_method(p,N)
+    PrintPoints(p)
+    B_method(p,N)
